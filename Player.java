@@ -8,7 +8,7 @@ import java.awt.*;
  * Creates the player
  *
  * @author Nathra Ramrajvel
- * @version 10/12
+ * @version 10/11
  */
 public class Player extends JComponent implements Runnable
 {

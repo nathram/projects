@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Player
-comment0.text=\r\n\ Creates\ the\ player\r\n\r\n\ @author\ Nathra\ Ramrajvel\r\n\ @version\ 10/12\r\n
+comment0.text=\r\n\ Creates\ the\ player\r\n\r\n\ @author\ Nathra\ Ramrajvel\r\n\ @version\ 10/11\r\n
 comment1.params=
 comment1.target=Player()
 comment1.text=\r\n\ Default\ constructor\r\n
