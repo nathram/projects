@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=UpLine
+comment1.params=
+comment1.target=UpLine()
+comment2.params=g
+comment2.target=void\ paintComponent(java.awt.Graphics)
+comment3.params=
+comment3.target=void\ nextFrame()
+numComments=4

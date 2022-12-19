@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=Pit
+comment0.text=\r\n\ Creates\ pits\r\n\r\n\ @author\ Nathra\ Ramrajvel\r\n\ @version\ 10/11\r\n
+comment1.params=
+comment1.target=Pit()
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Pit\r\n
+comment2.params=panel\ pos1\ pos2
+comment2.target=Pit(int,\ int,\ int)
+comment3.params=g
+comment3.target=void\ paintComponent(java.awt.Graphics)
+comment4.params=page
+comment4.target=void\ draw(java.awt.Graphics2D)
+comment5.params=
+comment5.target=getPits()
+comment6.params=
+comment6.target=void\ run()
+numComments=7

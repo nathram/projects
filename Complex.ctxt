@@ -1,0 +1,38 @@
+#BlueJ class context
+comment0.target=Complex
+comment0.text=\r\n\ \ \ \ Complex\ implements\ a\ complex\ number\ and\ defines\ complex\r\n\ \ \ \ arithmetic\ and\ mathematical\ functions\r\n\ \ \ \ Last\ Updated\ February\ 27,\ 2001\r\n\ \ \ \ Copyright\ 1997-2001\r\n\ \ \ \ @version\ 1.0\r\n\ \ \ \ @author\ Andrew\ G.\ Bennett\r\n
+comment1.params=u\ v
+comment1.target=Complex(double,\ double)
+comment1.text=\r\n\ \ \ \ \ \ \ \ Constructs\ the\ complex\ number\ z\ \=\ u\ +\ i*v\r\n\ \ \ \ \ \ \ \ @param\ u\ Real\ part\r\n\ \ \ \ \ \ \ \ @param\ v\ Imaginary\ part\r\n
+comment10.params=w
+comment10.target=Complex\ div(double)
+comment11.params=w
+comment11.target=Complex\ exp(int)
+comment11.text=\r\n\ \ \ \ \ \ \ \ Complex\ exponential\ (doesn't\ change\ this\ Complex\ number).\r\n\ \ \ \ \ \ \ \ @return\ exp(z)\ where\ z\ is\ this\ Complex\ number.\r\n
+comment12.params=
+comment12.target=Complex\ sqrt()
+comment12.text=\r\n\ \ \ \ \ \ \ \ Complex\ square\ root\ (doesn't\ change\ this\ complex\ number).\r\n\ \ \ \ \ \ \ \ Computes\ the\ principal\ branch\ of\ the\ square\ root,\ which\ \r\n\ \ \ \ \ \ \ \ is\ the\ value\ with\ 0\ <\=\ arg\ <\ pi.\r\n\ \ \ \ \ \ \ \ @return\ sqrt(z)\ where\ z\ is\ this\ Complex\ number.\r\n
+comment2.params=
+comment2.target=double\ real()
+comment2.text=\r\n\ \ \ \ \ \ \ \ Real\ part\ of\ this\ Complex\ number\ \r\n\ \ \ \ \ \ \ \ (the\ x-coordinate\ in\ rectangular\ coordinates).\r\n\ \ \ \ \ \ \ \ @return\ Re[z]\ where\ z\ is\ this\ Complex\ number.\r\n
+comment3.params=
+comment3.target=double\ imag()
+comment3.text=\r\n\ \ \ \ \ \ \ \ Imaginary\ part\ of\ this\ Complex\ number\ \r\n\ \ \ \ \ \ \ \ (the\ y-coordinate\ in\ rectangular\ coordinates).\r\n\ \ \ \ \ \ \ \ @return\ Im[z]\ where\ z\ is\ this\ Complex\ number.\r\n
+comment4.params=
+comment4.target=double\ mod()
+comment4.text=\r\n\ \ \ \ \ \ \ \ Modulus\ of\ this\ Complex\ number\r\n\ \ \ \ \ \ \ \ (the\ distance\ from\ the\ origin\ in\ polar\ coordinates).\r\n\ \ \ \ \ \ \ \ @return\ |z|\ where\ z\ is\ this\ Complex\ number.\r\n
+comment5.params=w
+comment5.target=Complex\ plus(Complex)
+comment5.text=\r\n\ \ \ \ \ \ \ \ Addition\ of\ Complex\ numbers\ (doesn't\ change\ this\ Complex\ number).\r\n\ \ \ \ \ \ \ \ <br>(x+i*y)\ +\ (s+i*t)\ \=\ (x+s)+i*(y+t).\r\n\ \ \ \ \ \ \ \ @param\ w\ is\ the\ number\ to\ add.\r\n\ \ \ \ \ \ \ \ @return\ z+w\ where\ z\ is\ this\ Complex\ number.\r\n
+comment6.params=w
+comment6.target=Complex\ minus(Complex)
+comment6.text=\r\n\ \ \ \ \ \ \ \ Subtraction\ of\ Complex\ numbers\ (doesn't\ change\ this\ Complex\ number).\r\n\ \ \ \ \ \ \ \ <br>(x+i*y)\ -\ (s+i*t)\ \=\ (x-s)+i*(y-t).\r\n\ \ \ \ \ \ \ \ @param\ w\ is\ the\ number\ to\ subtract.\r\n\ \ \ \ \ \ \ \ @return\ z-w\ where\ z\ is\ this\ Complex\ number.\r\n
+comment7.params=w
+comment7.target=Complex\ times(Complex)
+comment7.text=\r\n\ \ \ \ \ \ \ \ Complex\ multiplication\ (doesn't\ change\ this\ Complex\ number).\r\n\ \ \ \ \ \ \ \ @param\ w\ is\ the\ number\ to\ multiply\ by.\r\n\ \ \ \ \ \ \ \ @return\ z*w\ where\ z\ is\ this\ Complex\ number.\r\n
+comment8.params=w
+comment8.target=Complex\ times(double)
+comment9.params=w
+comment9.target=Complex\ div(Complex)
+comment9.text=\r\n\ \ \ \ \ \ \ \ Division\ of\ Complex\ numbers\ (doesn't\ change\ this\ Complex\ number).\r\n\ \ \ \ \ \ \ \ <br>(x+i*y)/(s+i*t)\ \=\ ((x*s+y*t)\ +\ i*(y*s-y*t))\ /\ (s^2+t^2)\r\n\ \ \ \ \ \ \ \ @param\ w\ is\ the\ number\ to\ divide\ by\r\n\ \ \ \ \ \ \ \ @return\ new\ Complex\ number\ z/w\ where\ z\ is\ this\ Complex\ number\ \ \r\n
+numComments=13
