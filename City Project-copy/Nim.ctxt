@@ -1,0 +1,24 @@
+#BlueJ class context
+comment0.target=Nim
+comment1.params=firstplayer
+comment1.target=Nim(int)
+comment1.text=\r\n\ Default\ constructor\:\ defaults\ to\ {3,\ 5,\ 8}\ as\ the\ starting\r\n\ @param\ int\ to\ indicate\ who\ goes\ first\r\n
+comment2.params=firstplayer\ pile1\ pile2\ pile3
+comment2.target=Nim(int,\ int,\ int,\ int)
+comment2.text=\r\n\ Copy\ constructor\r\n\ @param\ int\ who\ goes\ first,\ int\ for\ \#\ of\ stones\ in\ each\ pile\r\n
+comment3.params=
+comment3.target=void\ displayNim()
+comment3.text=\r\n\ Displays\ the\ board\r\n
+comment4.params=pile\ removed
+comment4.target=java.lang.String\ move(int,\ int)
+comment4.text=\r\n\ Completes\ a\ move\r\n\ @param\ int\ which\ pile,\ int\ how\ much\ to\ be\ removed\r\n\ @return\ either\ how\ much\ was\ removed\ +\ the\ pile,\ or\ to\ try\ again\ because\ the\ input\ was\ invalid\r\n
+comment5.params=
+comment5.target=void\ computerStrat()
+comment5.text=\r\n\ Populates\ the\ list\ of\ losing\ positions\r\n
+comment6.params=
+comment6.target=void\ computerCalcs()
+comment6.text=\r\n\ Calculates\ the\ best\ move\ (which\ pile\ +\ how\ much\ to\ remove)\r\n
+comment7.params=winner
+comment7.target=boolean\ gameOver(int)
+comment7.text=\r\n\ Checks\ if\ the\ game\ is\ over\ +\ displays\ the\ winner\r\n\ @param\ int\ movecounter\ to\ check\ whose\ move\ it\ is\ ->\ who\ won\r\n\ @returns\ true\ if\ game\ is\ over,\ false\ if\ the\ game\ is\ not\ over\r\n
+numComments=8

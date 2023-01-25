@@ -33,7 +33,7 @@ public class WorldViewer
         // bush w/ carrots
         // floating coins
         // star coins
-        // configure level layout (mario 1-2?)
+        // configure level layout (mario 6-4?)
         // starting/ending screen
         // not so hidden message easter egg
             

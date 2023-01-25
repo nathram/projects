@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=ApollonianGasket
+comment1.params=diameter1\ diameter2
+comment1.target=ApollonianGasket(int,\ int)
+comment2.params=page
+comment2.target=void\ paintComponent(java.awt.Graphics)
+comment3.params=x\ y\ diameter\ page
+comment3.target=void\ drawCircle(int,\ int,\ int,\ java.awt.Graphics)
+comment4.params=cx1\ cy1\ cx2\ cy2\ cx3\ cy3\ r1\ r2\ r3\ page
+comment4.target=void\ drawMoreCircles(double,\ double,\ double,\ double,\ double,\ double,\ double,\ double,\ double,\ java.awt.Graphics)
+numComments=5

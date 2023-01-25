@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=Buildings
+comment0.text=\r\n\ Creates\ the\ buildings\ and\ windows,\ and\ animates\ them\r\n\ \r\n\ @author\ Nathra\ Ramrajvel\ \r\n\ @version\ 1-31\r\n
+comment1.params=
+comment1.target=Buildings()
+comment1.text=\r\n\ Default\ constructor\r\n
+comment2.params=leftside\ rightside\ width\ height\ roadside
+comment2.target=Buildings(int,\ int,\ int,\ int,\ java.lang.String)
+comment2.text=\r\n\ Copy\ constructor,\ sets\ the\ building\r\n\ @param\ int\ distance\ of\ sides\ of\ building\ from\ left,\ width\ of\ building,\ height,\ and\ position\r\n
+comment3.params=g
+comment3.target=void\ paintComponent(java.awt.Graphics)
+comment4.params=page
+comment4.target=void\ draw(java.awt.Graphics2D)
+comment5.params=
+comment5.target=void\ run()
+numComments=6

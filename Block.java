@@ -196,7 +196,7 @@ public class Block extends JComponent implements Runnable
         int running  = 0;
         while(true)
         {
-            if (Player.hasPlayerLost())
+            if (Player.timer==500)
             {
                 arr1[0] = x;
                 arr1[1] = y;

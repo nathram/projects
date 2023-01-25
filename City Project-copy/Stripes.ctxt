@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=Stripes
+comment0.text=\r\n\ Creates\ and\ animates\ the\ stripes\ on\ the\ road\r\n\r\n\ @author\ Nathra\ Ramrajvel\r\n\ @version\ 1/31\r\n
+comment1.params=
+comment1.target=Stripes()
+comment1.text=\r\n\ Default\ constructor\r\n
+comment2.params=baseone\ basetwo
+comment2.target=Stripes(int,\ int)
+comment2.text=\r\n\ Copy\ constructor\r\n\ @param\ int\ base\ of\ stripes\ (in\ the\ trapezoid)\r\n
+comment3.params=g
+comment3.target=void\ paintComponent(java.awt.Graphics)
+comment4.params=page
+comment4.target=void\ draw(java.awt.Graphics2D)
+comment5.params=
+comment5.target=void\ run()
+numComments=6

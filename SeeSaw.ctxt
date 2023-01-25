@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=SeeSaw
+comment0.text=\r\n\r\n\r\n\ @author\r\n\ @version\r\n
+comment1.params=
+comment1.target=SeeSaw()
+comment1.text=\r\n\ Default\ constructor\r\n
+comment2.params=x1\ y1\ w\ h\ p\ panel\ snum
+comment2.target=SeeSaw(int,\ int,\ int,\ int,\ int,\ int,\ int)
+comment2.text=\r\n\ Copy\ constructor\r\n\ @param\ int\ base\ of\ stripes\ (in\ the\ trapezoid)\r\n
+comment3.params=
+comment3.target=getSeesaws()
+comment4.params=g
+comment4.target=void\ paintComponent(java.awt.Graphics)
+comment5.params=page
+comment5.target=void\ draw(java.awt.Graphics2D)
+comment6.params=
+comment6.target=void\ run()
+numComments=7

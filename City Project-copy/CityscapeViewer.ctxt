@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=CityscapeViewer
+comment0.text=\r\n\ Class\ that\ contains\ the\ main\ method\ for\ the\ program\ and\ creates\ the\ frame\ containing\ the\ component.\r\n\ \r\n
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment1.text=\r\n\ main\ method\ for\ the\ program\ which\ creates\ and\ configures\ the\ frame\ for\ the\ program\r\n\ \r\n\ @param\ args\ \ not\ used\r\n\r\n
+numComments=2

@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Ground
-comment0.text=\r\n\ Creates\ the\ ground\r\n\r\n\ @author\ Nathra\ Ramrajvel\r\n\ @version\ 10/11\r\n
+comment0.text=\r\n\ Creates\ the\ ground\r\n\r\n\ @author\r\n\ @version\r\n
 comment1.params=
 comment1.target=Ground()
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Ground\r\n
@@ -8,4 +8,6 @@ comment2.params=g
 comment2.target=void\ paintComponent(java.awt.Graphics)
 comment3.params=page
 comment3.target=void\ draw(java.awt.Graphics2D)
-numComments=4
+comment4.params=
+comment4.target=int\ groundHeight()
+numComments=5

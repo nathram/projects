@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=WorldViewer
+comment0.text=\r\n\ Class\ that\ contains\ the\ main\ method\ for\ the\ program\ and\ creates\ the\ frame\ containing\ the\ component.\r\n\ \r\n
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment1.text=\r\n\ main\ method\ for\ the\ program\ which\ creates\ and\ configures\ the\ frame\ for\ the\ program\r\n\ \r\n\ @param\ args\ \ not\ used\r\n\r\n
+comment2.params=e
+comment2.target=void\ keyTyped(java.awt.event.KeyEvent)
+comment3.params=e
+comment3.target=void\ keyPressed(java.awt.event.KeyEvent)
+comment4.params=e
+comment4.target=void\ keyReleased(java.awt.event.KeyEvent)
+numComments=5

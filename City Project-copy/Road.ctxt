@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=Road
+comment0.text=\r\n\ Creates\ the\ road\r\n\r\n\ @author\ Nathra\ Ramrajvel\r\n\ @version\ 1/31\r\n
+comment1.params=
+comment1.target=Road()
+comment1.text=\r\n\ Default\ constructor\r\n
+comment2.params=distance\ baseone
+comment2.target=Road(int,\ int)
+comment2.text=\r\n\ Copy\ constructer\r\n\ @param\ int\ distance\ from\ the\ edge\ of\ the\ buildings,\ top\ base\ length\ (how\ far\ the\ road\ goes)\r\n
+comment3.params=g
+comment3.target=void\ paintComponent(java.awt.Graphics)
+comment4.params=page
+comment4.target=void\ draw(java.awt.Graphics2D)
+numComments=5
