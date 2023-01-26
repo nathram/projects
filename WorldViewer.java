@@ -20,22 +20,6 @@ public class WorldViewer
      */
     public static void main(String[] args) throws InterruptedException
     {
-        // TO DO LIST
-        // background CHECK
-        // movement CHECK
-        // player object (star) CHECK
-        // pit object CHECK
-        // block object (interactable) CHECK
-        // transparent ground
-        // mystery items - yoshi-like bunny, mushroom knock off, gun?, TBD
-        // pipes
-        // obstacle objects - spiny plant thing, knock off goomba, koopa, koopa that throws axes
-        // bush w/ carrots
-        // floating coins
-        // star coins
-        // configure level layout (mario 6-4?)
-        // starting/ending screen
-        // not so hidden message easter egg
             
         JFrame frame = new JFrame();
         

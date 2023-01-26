@@ -47,7 +47,6 @@ public class Block extends JComponent implements Runnable
         //1 - breakable
         //2 - question, dead block when hit(coin)
         //3 - question, powerup
-        //4 - question, bunny
         //5 - dead block
         //6 - broken block
         panelNum = panel;

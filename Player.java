@@ -15,8 +15,9 @@ public class Player extends JComponent implements Runnable
     // instance variables
     private static int sidedistance, panel, groundHeight = 500;
     public static int height, width, coins = 0, shield = 0;
-    private static double groundDistance, jumpheight, ycoord, scalefactor;
+    public static double groundDistance, jumpheight, ycoord, scalefactor;
     private static ArrayList<Integer> onblocks = new ArrayList<Integer>();
+    public static double fallFrame = 0;
     public static int timer;
     public static boolean death = false, inpit = false, onblock = false, onseesaw = false, goomba = false, falling = false, down = false;
 
@@ -29,7 +30,7 @@ public class Player extends JComponent implements Runnable
         scalefactor = 6;
         jumpheight = 40;
         groundDistance = 0;
-        timer = 500;
+        timer = 499;
     }
     
     /**
@@ -90,12 +91,15 @@ public class Player extends JComponent implements Runnable
         page.drawLine(a+4, c+9 + (int)(x/4), a+5, c+9 + (int)(x/4));
         page.drawLine(a+5, c+9 + (int)(x/4), a+8, c+7 + (int)(x/4));
         page.drawLine(a+8, c+7 + (int)(x/4), a+9, c+5 + (int)(x/4));
-        //timer
-        Font stringFont = new Font("SansSerif", Font.PLAIN, 18);
-        page.setFont(stringFont);
-        page.drawString(""+timer+"s", 730, 20);
-        //coin counter
-        page.drawString("coins: " + coins, 5, 20);
+        if (panel != -1)
+        {
+            //timer
+            Font stringFont = new Font("SansSerif", Font.PLAIN, 18);
+            page.setFont(stringFont);
+            page.drawString(""+timer+"s", 730, 20);
+            //coin counter
+            page.drawString("coins: " + coins, 5, 20);
+        }
     }
     
     public static int getSideDistance()
@@ -142,15 +146,15 @@ public class Player extends JComponent implements Runnable
     {
         onseesaw = false;
         for (int i = 0; i < SeeSaw.getSeesaws().size(); i++)
-            if (sidedistance > SeeSaw.getSeesaws().get(i)[0]-225-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]-75)
+            if (sidedistance > SeeSaw.getSeesaws().get(i)[0]-150-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]-50)
             {
-                if (Math.abs(SeeSaw.getSeesaws().get(i)[1]+SeeSaw.height1 - 700 + groundDistance) <= 1)
+                if (Math.abs(SeeSaw.getSeesaws().get(i)[1]+SeeSaw.getSeesaws().get(i)[2] - 700 + groundDistance) <= 1)
                 {
                     onseesaw = true;
                 }
             }
-            else if (sidedistance > SeeSaw.getSeesaws().get(i)[0]+75-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]+225)
-                if (Math.abs(SeeSaw.getSeesaws().get(i)[1]+SeeSaw.height2 - 700 + groundDistance) <= 1)
+            else if (sidedistance > SeeSaw.getSeesaws().get(i)[0]+50-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]+150)
+                if (Math.abs(SeeSaw.getSeesaws().get(i)[1]+SeeSaw.getSeesaws().get(i)[3] - 700 + groundDistance) <= 1)
                 {
                     onseesaw = true;
                 }
@@ -162,16 +166,16 @@ public class Player extends JComponent implements Runnable
         int seesaw = -1;
         int side = -1;
         for (int i = 0; i < SeeSaw.getSeesaws().size(); i++)
-            if (sidedistance > SeeSaw.getSeesaws().get(i)[0]-225-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]-75)
+            if (sidedistance > SeeSaw.getSeesaws().get(i)[0]-150-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]-50)
             {
-                if (Math.abs(SeeSaw.getSeesaws().get(i)[1]+SeeSaw.height1 - 700 + groundDistance) <= 0)
+                if (Math.abs(SeeSaw.getSeesaws().get(i)[1]+SeeSaw.getSeesaws().get(i)[2] - 700 + groundDistance) <= 0)
                 {
                     seesaw = i;
                     side = 0;
                 }
             }
-            else if (sidedistance > SeeSaw.getSeesaws().get(i)[0]+75-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]+225)
-                if (Math.abs(SeeSaw.getSeesaws().get(i)[1]+SeeSaw.height2 - 700 + groundDistance) <= 0)
+            else if (sidedistance > SeeSaw.getSeesaws().get(i)[0]+50-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]+150)
+                if (Math.abs(SeeSaw.getSeesaws().get(i)[1]+SeeSaw.getSeesaws().get(i)[3] - 700 + groundDistance) <= 0)
                 {
                     seesaw = i;
                     side = 1;
@@ -185,7 +189,6 @@ public class Player extends JComponent implements Runnable
         int jumptime = 0;
         int falltime = 0;
         double jumpFrame = 0;
-        double fallFrame = 0;
         boolean stomp = false;
         boolean jumping = false;
         boolean invisFrame = false;
@@ -198,7 +201,7 @@ public class Player extends JComponent implements Runnable
         int seesaw = -1;
         int underblock = -1;
         int side = -1;
-        panel = 0;
+        panel = -1;
         while(true)
         {
             running ++;
@@ -219,6 +222,7 @@ public class Player extends JComponent implements Runnable
                 }
                 else
                 {
+                    //System.out.print("hi");
                     if (shield > 0)
                     {
                         invisFrame = true;
@@ -240,12 +244,23 @@ public class Player extends JComponent implements Runnable
             onBlock();
             if (hasPlayerLost())
             {
-                sidedistance = 100;
-                panel = 0;
+                if (timer == 0)
+                {
+                    timer = 500;
+                    panel = 0;
+                }
+                if (panel != -1)
+                {
+                    sidedistance = 20;
+                    coins = 0;
+                    groundHeight = Ground.groundHeight();
+                }
+                else if (panel == -1)
+                {
+                    sidedistance = 700;
+                }
                 groundDistance = 0;
                 scalefactor = 6;
-                timer = 500;
-                coins = 0;
                 falling = false;
                 goomba = false;
                 death = false;
@@ -275,13 +290,17 @@ public class Player extends JComponent implements Runnable
             //move into another panel of the game
             if (sidedistance >= 1440)
             {
-                sidedistance -= 1340;
+                sidedistance -= 1420;
                 panel++;
+                groundHeight = Ground.groundHeight();
+                groundDistance = groundHeight-500;
             }
             else if (sidedistance <= 10 && panel > 0)
             {
                 sidedistance += 1430;
                 panel--;
+                groundHeight = Ground.groundHeight();
+                groundDistance = groundHeight-500;
             }
             //falling not jumping
             if (groundHeight - groundDistance < 500 && !jumping && !onblock && !onseesaw && !stomp)
@@ -306,16 +325,16 @@ public class Player extends JComponent implements Runnable
                     }
                     for (int i = 0; i < SeeSaw.getSeesaws().size(); i++)
                     {
-                        if (sidedistance > SeeSaw.getSeesaws().get(i)[0]-225-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]-75)
+                        if (sidedistance > SeeSaw.getSeesaws().get(i)[0]-150-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]-50)
                         {
-                            if (SeeSaw.getSeesaws().get(i)[1]+SeeSaw.height1 >= 700-groundDistance && SeeSaw.getSeesaws().get(i)[1]+SeeSaw.height1 <= 700-groundDistance + jumpheight*Math.pow(1.7, -8)*Math.pow(1.7, fallFrame) && Block.getBlocks().get(i)[1] < miny)
+                            if (SeeSaw.getSeesaws().get(i)[1]+SeeSaw.getSeesaws().get(i)[2] >= 700-groundDistance && SeeSaw.getSeesaws().get(i)[1]+SeeSaw.getSeesaws().get(i)[2] <= 700-groundDistance + jumpheight*Math.pow(1.7, -8)*Math.pow(1.7, fallFrame) && Block.getBlocks().get(i)[1] < miny)
                             {
                                 seesaw = i;
                                 side = 0;
                             }
                         }
-                        else if (sidedistance > SeeSaw.getSeesaws().get(i)[0]+75-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]+225)
-                            if (SeeSaw.getSeesaws().get(i)[1]+SeeSaw.height2 >= 700-groundDistance && SeeSaw.getSeesaws().get(i)[1]+SeeSaw.height2 <= 700-groundDistance + jumpheight*Math.pow(1.7, -8)*Math.pow(1.7, fallFrame) && Block.getBlocks().get(i)[1] < miny)
+                        else if (sidedistance > SeeSaw.getSeesaws().get(i)[0]+50-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]+150)
+                            if (SeeSaw.getSeesaws().get(i)[1]+SeeSaw.getSeesaws().get(i)[3] >= 700-groundDistance && SeeSaw.getSeesaws().get(i)[1]+SeeSaw.getSeesaws().get(i)[3] <= 700-groundDistance + jumpheight*Math.pow(1.7, -8)*Math.pow(1.7, fallFrame) && Block.getBlocks().get(i)[1] < miny)
                             {
                                 seesaw = i;
                                 side = 1;
@@ -323,7 +342,7 @@ public class Player extends JComponent implements Runnable
                     }
                     if (groundHeight-(groundDistance - jumpheight*Math.pow(1.7, -8)*Math.pow(1.7, fallFrame)) >= 500)
                     {
-                        groundDistance = 500-groundHeight;
+                        groundDistance = groundHeight-500;
                         fallFrame = 0;
                         falltime = 0;
                         falling = false;
@@ -341,9 +360,9 @@ public class Player extends JComponent implements Runnable
                     else if (seesaw != -1)
                     {
                         if (side == 0)
-                            groundDistance = 700-SeeSaw.getSeesaws().get(seesaw)[1]-SeeSaw.height1;
+                            groundDistance = 700-SeeSaw.getSeesaws().get(seesaw)[1]-SeeSaw.getSeesaws().get(seesaw)[2];
                         else if (side == 1)
-                            groundDistance = 700-SeeSaw.getSeesaws().get(seesaw)[1]-SeeSaw.height2;
+                            groundDistance = 700-SeeSaw.getSeesaws().get(seesaw)[1]-SeeSaw.getSeesaws().get(seesaw)[3];
                         fallFrame = 0;
                         falltime = 0;
                         seesaw = -1;
@@ -373,16 +392,16 @@ public class Player extends JComponent implements Runnable
                     
                     for (int i = 0; i < SeeSaw.getSeesaws().size(); i++)
                     {
-                        if (sidedistance > SeeSaw.getSeesaws().get(i)[0]-225-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]-75)
+                        if (sidedistance > SeeSaw.getSeesaws().get(i)[0]-150-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]-50)
                         {
-                            if (!onseesaw && SeeSaw.getSeesaws().get(i)[1]+SeeSaw.height1 >= 700-groundDistance && SeeSaw.getSeesaws().get(i)[1]+SeeSaw.height1 <= 700-groundDistance + jumpheight*Math.pow(1.7, -8)*Math.pow(1.7, fallFrame) && Block.getBlocks().get(i)[1] < miny)
+                            if (!onseesaw && SeeSaw.getSeesaws().get(i)[1]+SeeSaw.getSeesaws().get(i)[2] >= 700-groundDistance && SeeSaw.getSeesaws().get(i)[1]+SeeSaw.getSeesaws().get(i)[2] <= 700-groundDistance + jumpheight*Math.pow(1.7, -8)*Math.pow(1.7, fallFrame) && Block.getBlocks().get(i)[1] < miny)
                             {
                                 seesaw = i;
                                 side = 0;
                             }
                         }
-                        else if (sidedistance > SeeSaw.getSeesaws().get(i)[0]+75-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]+225)
-                            if (!onseesaw && SeeSaw.getSeesaws().get(i)[1]+SeeSaw.height2 >= 700-groundDistance && SeeSaw.getSeesaws().get(i)[1]+SeeSaw.height2 <= 700-groundDistance + jumpheight*Math.pow(1.7, -8)*Math.pow(1.7, fallFrame) && Block.getBlocks().get(i)[1] < miny)
+                        else if (sidedistance > SeeSaw.getSeesaws().get(i)[0]+50-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]+150)
+                            if (!onseesaw && SeeSaw.getSeesaws().get(i)[1]+SeeSaw.getSeesaws().get(i)[3] >= 700-groundDistance && SeeSaw.getSeesaws().get(i)[1]+SeeSaw.getSeesaws().get(i)[3] <= 700-groundDistance + jumpheight*Math.pow(1.7, -8)*Math.pow(1.7, fallFrame) && Block.getBlocks().get(i)[1] < miny)
                             {
                                 seesaw = i;
                                 side = 1;
@@ -449,7 +468,7 @@ public class Player extends JComponent implements Runnable
                         fallFrame += 1;
                         if (groundHeight-(groundDistance - jumpheight*Math.pow(1.2, -17)*Math.pow(1.2, fallFrame)) >= 500)
                         {
-                            groundDistance = 500 - groundHeight;
+                            groundDistance = groundHeight-500;
                         }
                         else if (miny != 9999)
                         {
@@ -466,9 +485,9 @@ public class Player extends JComponent implements Runnable
                         else if (seesaw != -1)
                         {
                             if (side == 0)
-                                groundDistance = 700-SeeSaw.getSeesaws().get(seesaw)[1]-SeeSaw.height1;
+                                groundDistance = 700-SeeSaw.getSeesaws().get(seesaw)[1]-SeeSaw.getSeesaws().get(seesaw)[2];
                             else if (side == 1)
-                                groundDistance = 700-SeeSaw.getSeesaws().get(seesaw)[1]-SeeSaw.height2;
+                                groundDistance = 700-SeeSaw.getSeesaws().get(seesaw)[1]-SeeSaw.getSeesaws().get(seesaw)[3];
                             side = -1;
                             seesaw = -1;
                             fallFrame = 0;

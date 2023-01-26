@@ -15,7 +15,7 @@ public class Enemy extends JComponent implements Runnable
     // instance variables
     private int sidedistance, panelNum, direction, groundHeight, origs, origg, origp;
     private int height, width;
-    private double groundDistance, scalefactor;
+    private double groundDistance, scalefactor, factor, factor2, factor3;
     private ArrayList<Integer> onblocks = new ArrayList<Integer>();
     public boolean death = false,  onblock = false, onseesaw = false;
 
@@ -104,15 +104,15 @@ public class Enemy extends JComponent implements Runnable
     {
         onseesaw = false;
         for (int i = 0; i < SeeSaw.getSeesaws().size(); i++)
-            if (sidedistance > SeeSaw.getSeesaws().get(i)[0]-225-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]-75)
+            if (sidedistance > SeeSaw.getSeesaws().get(i)[0]-150-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]-50)
             {
-                if (Math.abs(SeeSaw.getSeesaws().get(i)[1]+SeeSaw.height1 - 700 + groundDistance) <= 1)
+                if (Math.abs(SeeSaw.getSeesaws().get(i)[1]+SeeSaw.getSeesaws().get(i)[2] - 700 + groundDistance) <= 1)
                 {
                     onseesaw = true;
                 }
             }
-            else if (sidedistance > SeeSaw.getSeesaws().get(i)[0]+75-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]+225)
-                if (Math.abs(SeeSaw.getSeesaws().get(i)[1]+SeeSaw.height2 - 700 + groundDistance) <= 1)
+            else if (sidedistance > SeeSaw.getSeesaws().get(i)[0]+50-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]+150)
+                if (Math.abs(SeeSaw.getSeesaws().get(i)[1]+SeeSaw.getSeesaws().get(i)[3] - 700 + groundDistance) <= 1)
                 {
                     onseesaw = true;
                 }
@@ -124,16 +124,16 @@ public class Enemy extends JComponent implements Runnable
         int seesaw = -1;
         int side = -1;
         for (int i = 0; i < SeeSaw.getSeesaws().size(); i++)
-            if (sidedistance > SeeSaw.getSeesaws().get(i)[0]-225-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]-75)
+            if (sidedistance > SeeSaw.getSeesaws().get(i)[0]-150-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]-50)
             {
-                if (Math.abs(SeeSaw.getSeesaws().get(i)[1]+SeeSaw.height1 - 700 + groundDistance) <= 0)
+                if (Math.abs(SeeSaw.getSeesaws().get(i)[1]+SeeSaw.getSeesaws().get(i)[2] - 700 + groundDistance) <= 0)
                 {
                     seesaw = i;
                     side = 0;
                 }
             }
-            else if (sidedistance > SeeSaw.getSeesaws().get(i)[0]+75-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]+225)
-                if (Math.abs(SeeSaw.getSeesaws().get(i)[1]+SeeSaw.height2 - 700 + groundDistance) <= 0)
+            else if (sidedistance > SeeSaw.getSeesaws().get(i)[0]+50-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]+150)
+                if (Math.abs(SeeSaw.getSeesaws().get(i)[1]+SeeSaw.getSeesaws().get(i)[3] - 700 + groundDistance) <= 0)
                 {
                     seesaw = i;
                     side = 1;
@@ -188,18 +188,23 @@ public class Enemy extends JComponent implements Runnable
         int seesaw = -1;
         int underblock = -1;
         int side = -1;
+        if (panelNum == 0)
+        {
+            factor = 1.7;
+            factor2 = -8;
+            factor3 = 40;
+        }
+        else
+        {
+            factor = 1;
+            factor2 = -12;
+            factor3 = 20;
+        }
+        
         while(true)
         {
             running ++;
-            onBlock();
-            if (Player.getSideDistance() >= sidedistance - Player.width && Player.getSideDistance() <= sidedistance + width)
-                if (Player.getGD() >= groundDistance - Player.height && Player.getGD() <= groundDistance + height && Player.getPanel() == panelNum)
-                {
-                    Player.goomba = true;
-                    if (Player.falling || Player.down)
-                        death = true;
-                }
-                    
+            
             if (Player.timer==500)
             {
                 sidedistance = origs;
@@ -207,147 +212,162 @@ public class Enemy extends JComponent implements Runnable
                 panelNum = origp;
                 death = false;
             }
-            if (hasEnemyDied())
+            if (Player.getPanel() == panelNum)
             {
-                sidedistance = -100;
-                panelNum = -2;
-                groundDistance = 0;
-                falling = false;
-                fallFrame = 0;
-                falltime = 0;
-            }
-            groundHeight = groundHeight();
-            if(onSeeSaw())
-            {
-                if(onThisSeeSaw()[1] == 0)
-                {
-                    SeeSaw.getSeesaws().set(onThisSeeSaw()[0], new int[]{SeeSaw.getSeesaws().get(onThisSeeSaw()[0])[0], SeeSaw.getSeesaws().get(onThisSeeSaw()[0])[1], SeeSaw.getSeesaws().get(onThisSeeSaw()[0])[2]+1, SeeSaw.getSeesaws().get(onThisSeeSaw()[0])[3]-1});
-                    if (groundHeight - groundDistance < 500)
-                        groundDistance -= 1;
-                }
-                else if(onThisSeeSaw()[1] == 1)
-                {
-                    SeeSaw.getSeesaws().set(onThisSeeSaw()[0], new int[]{SeeSaw.getSeesaws().get(onThisSeeSaw()[0])[0], SeeSaw.getSeesaws().get(onThisSeeSaw()[0])[1], SeeSaw.getSeesaws().get(onThisSeeSaw()[0])[2]-1, SeeSaw.getSeesaws().get(onThisSeeSaw()[0])[3]+1});
-                    if (groundHeight - groundDistance < 500)
-                        groundDistance -= 1;
-                }
-            }
-            //move into another panel of the game
-            if (sidedistance >= 1440)
-            {
-                sidedistance -= 1430;
-                panelNum++;
-            }
-            else if (sidedistance <= 10 && panelNum > 0)
-            {
-                sidedistance += 1430;
-                panelNum--;
-            }
-            //falling
-            if (groundHeight - groundDistance < 499 && !onblock && !onseesaw)
-            {
-                if (!falling)
-                    falltime = running;
-                falling = true;
-                if ((running - falltime) % 3 == 0 && falltime != 0)
-                {
-                    fallFrame += 1;
-                    for (int i = 0; i < Block.getBlocks().size(); i++)
+                onBlock();
+                
+                if (Player.getSideDistance() >= sidedistance - Player.width && Player.getSideDistance() <= sidedistance + width)
+                    if (Player.getGD() >= groundDistance - Player.height && Player.getGD() <= groundDistance + height && Player.getPanel() == panelNum)
                     {
-                        if (sidedistance > Block.getBlocks().get(i)[0]-width && sidedistance < Block.getBlocks().get(i)[0]+50)
-                        
-                            if (Block.getBlocks().get(i)[1] >= 700-groundDistance && Block.getBlocks().get(i)[1] <= 700-groundDistance + 40*Math.pow(1.7, -8)*Math.pow(1.7, fallFrame) && Block.getBlocks().get(i)[1] < miny)
-                            {
-                                miny = Block.getBlocks().get(i)[1];
-                                block = i;
-                            }
+                        Player.goomba = true;
                     }
-                    for (int i = 0; i < SeeSaw.getSeesaws().size(); i++)
+                    else if (Player.getGD() > groundDistance + height && Player.getGD()- 40*Math.pow(1.7, -8)*Math.pow(factor, Player.fallFrame) < groundDistance + height && (Player.falling || Player.down))
                     {
-                        if (sidedistance > SeeSaw.getSeesaws().get(i)[0]-225-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]-75)
+                        Player.goomba = true;
+                        Player.groundDistance = groundDistance + height;
+                        death = true;
+                    }
+                if (hasEnemyDied())
+                {
+                    sidedistance = -100;
+                    panelNum = -2;
+                    groundDistance = 0;
+                    falling = false;
+                    fallFrame = 0;
+                    falltime = 0;
+                }
+                groundHeight = groundHeight();
+                if(onSeeSaw())
+                {
+                    if(onThisSeeSaw()[1] == 0)
+                    {
+                        SeeSaw.getSeesaws().set(onThisSeeSaw()[0], new int[]{SeeSaw.getSeesaws().get(onThisSeeSaw()[0])[0], SeeSaw.getSeesaws().get(onThisSeeSaw()[0])[1], SeeSaw.getSeesaws().get(onThisSeeSaw()[0])[2]+1, SeeSaw.getSeesaws().get(onThisSeeSaw()[0])[3]-1});
+                        if (groundHeight - groundDistance < 500)
+                            groundDistance -= 1;
+                    }
+                    else if(onThisSeeSaw()[1] == 1)
+                    {
+                        SeeSaw.getSeesaws().set(onThisSeeSaw()[0], new int[]{SeeSaw.getSeesaws().get(onThisSeeSaw()[0])[0], SeeSaw.getSeesaws().get(onThisSeeSaw()[0])[1], SeeSaw.getSeesaws().get(onThisSeeSaw()[0])[2]-1, SeeSaw.getSeesaws().get(onThisSeeSaw()[0])[3]+1});
+                        if (groundHeight - groundDistance < 500)
+                            groundDistance -= 1;
+                    }
+                }
+                //move into another panel of the game
+                if (sidedistance >= 1440)
+                {
+                    sidedistance -= 1430;
+                    panelNum++;
+                }
+                else if (sidedistance <= 10 && panelNum > 0)
+                {
+                    sidedistance += 1430;
+                    panelNum--;
+                }
+                //falling
+                if (groundHeight - groundDistance < 499 && !onblock && !onseesaw)
+                {
+                    if (!falling)
+                        falltime = running;
+                    falling = true;
+                    if ((running - falltime) % 3 == 0 && falltime != 0)
+                    {
+                        fallFrame += 1;
+                        for (int i = 0; i < Block.getBlocks().size(); i++)
                         {
-                            if (SeeSaw.getSeesaws().get(i)[1]+SeeSaw.height1 >= 700-groundDistance && SeeSaw.getSeesaws().get(i)[1]+SeeSaw.height1 <= 700-groundDistance + 40*Math.pow(1.7, -8)*Math.pow(1.7, fallFrame) && Block.getBlocks().get(i)[1] < miny)
-                            {
-                                seesaw = i;
-                                side = 0;
-                            }
+                            if (sidedistance > Block.getBlocks().get(i)[0]-width && sidedistance < Block.getBlocks().get(i)[0]+50)
+                            
+                                if (Block.getBlocks().get(i)[1] >= 700-groundDistance && Block.getBlocks().get(i)[1] <= 700-groundDistance + factor3*Math.pow(factor, factor2)*Math.pow(factor, fallFrame) && Block.getBlocks().get(i)[1] < miny)
+                                {
+                                    miny = Block.getBlocks().get(i)[1];
+                                    block = i;
+                                }
                         }
-                        else if (sidedistance > SeeSaw.getSeesaws().get(i)[0]+75-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]+225)
-                            if (SeeSaw.getSeesaws().get(i)[1]+SeeSaw.height2 >= 700-groundDistance && SeeSaw.getSeesaws().get(i)[1]+SeeSaw.height2 <= 700-groundDistance + 40*Math.pow(1.7, -8)*Math.pow(1.7, fallFrame) && Block.getBlocks().get(i)[1] < miny)
+                        for (int i = 0; i < SeeSaw.getSeesaws().size(); i++)
+                        {
+                            if (sidedistance > SeeSaw.getSeesaws().get(i)[0]-150-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]-50)
                             {
-                                seesaw = i;
-                                side = 1;
+                                if (SeeSaw.getSeesaws().get(i)[1]+SeeSaw.getSeesaws().get(i)[2] >= 700-groundDistance && SeeSaw.getSeesaws().get(i)[1]+SeeSaw.getSeesaws().get(i)[2] <= 700-groundDistance + factor3*Math.pow(factor, factor2)*Math.pow(factor, fallFrame) && Block.getBlocks().get(i)[1] < miny)
+                                {
+                                    seesaw = i;
+                                    side = 0;
+                                }
                             }
+                            else if (sidedistance > SeeSaw.getSeesaws().get(i)[0]+50-width && sidedistance < SeeSaw.getSeesaws().get(i)[0]+150)
+                                if (SeeSaw.getSeesaws().get(i)[1]+SeeSaw.getSeesaws().get(i)[3] >= 700-groundDistance && SeeSaw.getSeesaws().get(i)[1]+SeeSaw.getSeesaws().get(i)[3] <= 700-groundDistance + factor3*Math.pow(factor, factor2)*Math.pow(factor, fallFrame) && Block.getBlocks().get(i)[1] < miny)
+                                {
+                                    seesaw = i;
+                                    side = 1;
+                                }
+                        }
+                        if (groundHeight-(groundDistance - factor3*Math.pow(factor, factor2)*Math.pow(factor, fallFrame)) >= 500)
+                        {
+                            groundDistance = groundHeight-500;
+                            fallFrame = 0;
+                            falltime = 0;
+                            falling = false;
+                        }
+                        else if (miny != 9999)
+                        {
+                            groundDistance = 700-Block.getBlocks().get(block)[1];
+                            fallFrame = 0;
+                            falltime = 0;
+                            miny = 9999;
+                            block = -1;
+                            onblock = true;
+                            falling = false;
+                        }
+                        else if (seesaw != -1)
+                        {
+                            if (side == 0)
+                                groundDistance = 700-SeeSaw.getSeesaws().get(seesaw)[1]-SeeSaw.getSeesaws().get(seesaw)[2];
+                            else if (side == 1)
+                                groundDistance = 700-SeeSaw.getSeesaws().get(seesaw)[1]-SeeSaw.getSeesaws().get(seesaw)[3];
+                            fallFrame = 0;
+                            falltime = 0;
+                            seesaw = -1;
+                            side = -1;
+                            onseesaw = true;
+                            falling = false;
+                        }
+                        else
+                            groundDistance -= factor3*Math.pow(factor, factor2)*Math.pow(factor, fallFrame);
                     }
-                    if (groundHeight-(groundDistance - 40*Math.pow(1.7, -8)*Math.pow(1.7, fallFrame)) >= 500)
+                }
+                if (direction == 1 && panelNum != 2)
+                {
+                    for (int i = 0; i < Block.getBlocks().size(); i++)
+                        if (700-groundDistance > Block.getBlocks().get(i)[1] && 700-groundDistance <= Block.getBlocks().get(i)[1]+50)
+                            if (sidedistance + width + 5 >= Block.getBlocks().get(i)[0] && sidedistance + width <= Block.getBlocks().get(i)[0])
+                                block = i;
+                    //if (falling && sidedistance + 5 > bound1+bound2-width && inpit)
+                        //sidedistance = bound1+bound2-width;
+                    //else
+                    if (block != -1)
                     {
-                        groundDistance = 500-groundHeight;
-                        fallFrame = 0;
-                        falltime = 0;
-                        falling = false;
-                    }
-                    else if (miny != 9999)
-                    {
-                        groundDistance = 700-Block.getBlocks().get(block)[1];
-                        fallFrame = 0;
-                        falltime = 0;
-                        miny = 9999;
+                        sidedistance = Block.getBlocks().get(block)[0]-width;
                         block = -1;
-                        onblock = true;
-                        falling = false;
-                    }
-                    else if (seesaw != -1)
-                    {
-                        if (side == 0)
-                            groundDistance = 700-SeeSaw.getSeesaws().get(seesaw)[1]-SeeSaw.height1;
-                        else if (side == 1)
-                            groundDistance = 700-SeeSaw.getSeesaws().get(seesaw)[1]-SeeSaw.height2;
-                        fallFrame = 0;
-                        falltime = 0;
-                        seesaw = -1;
-                        side = -1;
-                        onseesaw = true;
-                        falling = false;
                     }
                     else
-                        groundDistance -= 40*Math.pow(1.7, -8)*Math.pow(1.7, fallFrame);
+                        sidedistance += 1;
                 }
-            }
-            if (direction == 1)
-            {
-                for (int i = 0; i < Block.getBlocks().size(); i++)
-                    if (700-groundDistance > Block.getBlocks().get(i)[1] && 700-groundDistance <= Block.getBlocks().get(i)[1]+50)
-                        if (sidedistance + width + 5 >= Block.getBlocks().get(i)[0] && sidedistance + width <= Block.getBlocks().get(i)[0])
-                            block = i;
-                //if (falling && sidedistance + 5 > bound1+bound2-width && inpit)
-                    //sidedistance = bound1+bound2-width;
-                //else
-                if (block != -1)
+                else if (direction == 0 && panelNum != 2)
                 {
-                    sidedistance = Block.getBlocks().get(block)[0]-width;
-                    block = -1;
+                    for (int i = 0; i < Block.getBlocks().size(); i++)
+                        if (700-groundDistance > Block.getBlocks().get(i)[1] && 700-groundDistance <= Block.getBlocks().get(i)[1]+50)
+                            if (sidedistance - 55 <= Block.getBlocks().get(i)[0] && sidedistance - 50 >= Block.getBlocks().get(i)[0])
+                                block = i;                   
+                    //if (falling && sidedistance - 5 < bound1 && inpit)
+                        //sidedistance = bound1;
+                    //else
+                    if (block != -1)
+                    {
+                        sidedistance = Block.getBlocks().get(block)[0]+50;
+                        block = -1;
+                    }
+                    else
+                        sidedistance -= 1;
                 }
-                else
-                    sidedistance += 1;
             }
-            else if (direction == 0)
-            {
-                for (int i = 0; i < Block.getBlocks().size(); i++)
-                    if (700-groundDistance > Block.getBlocks().get(i)[1] && 700-groundDistance <= Block.getBlocks().get(i)[1]+50)
-                        if (sidedistance - 55 <= Block.getBlocks().get(i)[0] && sidedistance - 50 >= Block.getBlocks().get(i)[0])
-                            block = i;                   
-                //if (falling && sidedistance - 5 < bound1 && inpit)
-                    //sidedistance = bound1;
-                //else
-                if (block != -1)
-                {
-                    sidedistance = Block.getBlocks().get(block)[0]+50;
-                    block = -1;
-                }
-                else
-                    sidedistance -= 1;
-            }
-            
 
             running ++;
             try{

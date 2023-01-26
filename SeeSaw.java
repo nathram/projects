@@ -13,7 +13,7 @@ import java.awt.*;
 public class SeeSaw extends JComponent implements Runnable
 {
     // instance variables
-    public static int ropewidth, height1, height2, platform, x, y, panelNum, seesawNum, origh1, origh2;
+    public int ropewidth, height1, height2, platform, x, y, panelNum, seesawNum, origh1, origh2;
     public static ArrayList<int[]> seesaws = new ArrayList<int[]>();
     public int[] arr1;
 

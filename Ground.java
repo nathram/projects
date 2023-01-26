@@ -23,11 +23,15 @@ public class Ground extends JComponent
      */
     public Ground()
     {
-        grounds.add(new int[]{-1, 0, 1600, 700});
-        grounds.add(new int[]{0, 0, 600, 700});
-        grounds.add(new int[]{0, 1200, 400, 700});
-        grounds.add(new int[]{1, 0, 1600, 700});
-        grounds.add(new int[]{2, 0, 1600, 700});
+        grounds.add(new int[]{-1, 0, 200, 700});
+        grounds.add(new int[]{-1, 400, 1200, 700});
+        grounds.add(new int[]{0, 0, 800, 700});
+        grounds.add(new int[]{0, 1000, 600, 500});
+        grounds.add(new int[]{1, 0, 150, 700});
+        grounds.add(new int[]{1, 1300, 300, 500});
+        grounds.add(new int[]{2, 0, 150, 700});
+        grounds.add(new int[]{2, 1300, 300, 700});
+        grounds.add(new int[]{3, 0, 1600, 700});
     }
 
     @Override
@@ -50,24 +54,56 @@ public class Ground extends JComponent
         if (Player.getPanel() == -1)
         {
             page.setColor(new Color(90, 191, 50));
-            page.fillRect(0, 700, 1600, 500);
+            page.fillRect(0, 700, 200, 500);
+            page.fillRect(400, 700, 1200, 500);
+            page.setColor(Color.black);
+            Font stringFont = new Font("SansSerif", Font.PLAIN, 30);
+            page.setFont(stringFont);
+            page.drawString("WELCOME TO ", 400, 210);
+            page.drawString("currently unnamed game", 450, 340);
+            page.drawString("which is DEFINITELY NOT", 500, 470);
+            Font stringFont2 = new Font("SansSerif", Font.PLAIN, 10);
+            page.setFont(stringFont2);
+            page.drawString("a mario rip-off...................", 550, 535);
+            page.drawString("happy bday", 700, 630);
+            Font stringFont3 = new Font("SansSerif", Font.PLAIN, 18);
+            page.setFont(stringFont3);
+            
+            page.drawString("bubble has been kidnapped by an unnamed villain!!! go get her back", 600, 600);
+            page.drawString("over here!!!! this is the correct path!!!!", 200, 650);
+            page.drawString("certain doom this way ---->", 1250, 650);
             //panel, bound1, distance, groundheight
         }
         else if (Player.getPanel() == 0)
         {
             page.setColor(new Color(90, 191, 50));
-            page.fillRect(0, 700, 600, 500);
-            page.fillRect(1200, 700, 400, 500);
+            page.fillRect(0, 700, 800, 500);
+            page.fillRect(1000, 500, 600, 700);
         }
         else if (Player.getPanel() == 1)
         {
             page.setColor(new Color(90, 191, 50));
-            page.fillRect(0, 700, 1600, 500);
+            page.fillRect(0, 700, 150, 500);
+            page.fillRect(1300, 500, 300, 700);
         }
         else if (Player.getPanel() == 2)
         {
             page.setColor(new Color(90, 191, 50));
+            page.fillRect(0, 700, 150, 500);
+            page.fillRect(1300, 700, 300, 500);
+            page.setColor(new Color(169,169,169));
+            page.fillOval(1350, 675, 50, 25);
+            page.fillOval(1340, 665, 20, 20);
+            Font stringFont3 = new Font("SansSerif", Font.PLAIN, 18);
+            page.setFont(stringFont3);
+            page.setColor(Color.black);
+            page.drawString("pretend this is a bunny", 1250, 650);
+        }
+        else if (Player.getPanel() == 3)
+        {
+            page.setColor(new Color(90, 191, 50));
             page.fillRect(0, 700, 1600, 500);
+            page.drawString("you won :D", 650, 500);
         }
     }
     
