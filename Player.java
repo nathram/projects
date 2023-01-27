@@ -251,6 +251,7 @@ public class Player extends JComponent implements Runnable
                 }
                 if (panel != -1)
                 {
+                    timer = 500;
                     sidedistance = 20;
                     coins = 0;
                     groundHeight = Ground.groundHeight();

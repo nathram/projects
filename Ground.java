@@ -103,6 +103,9 @@ public class Ground extends JComponent
         {
             page.setColor(new Color(90, 191, 50));
             page.fillRect(0, 700, 1600, 500);
+            Font stringFont3 = new Font("SansSerif", Font.PLAIN, 30);
+            page.setFont(stringFont3);
+            page.setColor(Color.black);
             page.drawString("you won :D", 650, 500);
         }
     }
